@@ -27,7 +27,6 @@ module mult(product,overflow,multiplicand, multiplier, clk, counter);
 
 	wire temp9,temp10,temp11;
 
-	or fjeofgrgewfoej(temp8,temp6,temp7);
 
 	and jdfebroivjsfo(temp9,ctrl_bits[0],ctrl_bits[1],ctrl_bits[2]);
 	or fjeoergegwfoej(temp11,!ctrl_bits[2],temp9);
