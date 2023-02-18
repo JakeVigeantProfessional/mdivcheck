@@ -12,7 +12,7 @@ module mult(product,overflow,multiplicand, multiplier, clk, counter);
     assign running_prod_init[32:1] = multiplier[31:0];
     assign running_prod_init[64:33] = 32'b0;
 
-	and a04204(temp2,~counter[0],~counter[1],~counter[2],~counter[3],~counter[4]);
+	and gateTemp(temp2,~counter[0],~counter[1],~counter[2],~counter[3],~counter[4]);
 
 
 	assign in=temp2 ? running_prod_init:running_prod>>>2;
@@ -28,8 +28,8 @@ module mult(product,overflow,multiplicand, multiplier, clk, counter);
 	wire temp9,temp10,temp11;
 
 
-	and jdfebroivjsfo(temp9,ctrl_bits[0],ctrl_bits[1],ctrl_bits[2]);
-	or fjeoergegwfoej(temp11,!ctrl_bits[2],temp9);
+	and tempGate2(temp9,ctrl_bits[0],ctrl_bits[1],ctrl_bits[2]);
+	or tempgate3(temp11,!ctrl_bits[2],temp9);
 	wire [31:0]w98,w99,w100;
 	assign w98= (ctrl_bits[0] & ctrl_bits[1] & ctrl_bits[2]) | (~ctrl_bits[0] & ~ctrl_bits[1] & ~ctrl_bits[2]) ? 0 : multiplicand;
 	assign w100=w98<<1;
@@ -37,22 +37,22 @@ module mult(product,overflow,multiplicand, multiplier, clk, counter);
 
 	wire [31:0]num1,num2,ans,notted;
 	wire useless;
-	or32 ofeohfofheu(num1,0,running_prod_out[64:33]);
-	not32 nefneofe(notted,w99);
+	or32 ored(num1,0,running_prod_out[64:33]);
+	not32 nottedout(notted,w99);
 	assign num2= temp11 ? w99 : notted;
-	thirtytwobitadder jfijfiejfi(ans,num1,num2,useless,!temp11);
+	thirtytwobitadder adder2(ans,num1,num2,useless,!temp11);
 
 
-	or32 fenfe(running_prod[64:33],ans,0);
-	or32 fejnfe(running_prod[32:1],running_prod_out[32:1],0);
-	or fejjnfe(running_prod[0],running_prod_out[0],1'b0);
+	or32 prodRes(running_prod[64:33],ans,0);
+	or32 prodRuns(running_prod[32:1],running_prod_out[32:1],0);
+	or prodRunt(running_prod[0],running_prod_out[0],1'b0);
 
-	or32 dvijjjj(product,running_prod[32:1],0);
+	or32 prodMain(product,running_prod[32:1],0);
 
 	wire wrong;
-	and acjidjicjd(wrong,multiplicand[31],multiplier[31],product[31]);
+	and chekcWrong(wrong,multiplicand[31],multiplier[31],product[31]);
 	wire chkFir;
-	and a999999(chkFir,running_prod_out[64] , running_prod_out[63] , running_prod_out[62] ,
+	and andFirst(chkFir,running_prod_out[64] , running_prod_out[63] , running_prod_out[62] ,
         running_prod_out[61] , running_prod_out[60] , running_prod_out[59] , running_prod_out[58] ,
         running_prod_out[57] , running_prod_out[56] , running_prod_out[55] , running_prod_out[54] ,
         running_prod_out[53] , running_prod_out[52] , running_prod_out[51] , running_prod_out[50] ,
@@ -62,7 +62,7 @@ module mult(product,overflow,multiplicand, multiplier, clk, counter);
         running_prod_out[37] , running_prod_out[36] , running_prod_out[35] , running_prod_out[34] ,
         running_prod_out[33] , running_prod_out[32]);
 	wire chkSec;
-	and a99h9999(chkSec,~running_prod_out[64] , ~running_prod_out[63] , ~running_prod_out[62] ,
+	and andSec(chkSec,~running_prod_out[64] , ~running_prod_out[63] , ~running_prod_out[62] ,
 			  ~running_prod_out[61] , ~running_prod_out[60] , ~running_prod_out[59] , ~running_prod_out[58] ,
 			  ~running_prod_out[57] , ~running_prod_out[56] , ~running_prod_out[55] , ~running_prod_out[54] ,
 			  ~running_prod_out[53] , ~running_prod_out[52] , ~running_prod_out[51] , ~running_prod_out[50] ,
